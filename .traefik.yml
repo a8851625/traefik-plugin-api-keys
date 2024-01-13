@@ -1,0 +1,23 @@
+displayName: API Keys
+type: middleware
+iconPath: .assets/icon.png
+
+import: github.com/a8851625/traefik-plugin-api-keys
+
+summary: '[traefik-plugin-api-keys] verify api key'
+
+testData:
+  ValidAPIKeys:
+    - test
+  APIKeyHeader: X-Demo
+  UseAuthorization: false
+  IgnorePaths:
+    - /demo
+  BlockPaths:
+    - /login
+  RemoveHeader: false
+
+# testData:
+#   Headers:
+#     X-Demo: test
+#     X-URL: '{{URL}}'
