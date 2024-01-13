@@ -1,4 +1,4 @@
-package apikey_test
+package traefik_plugin_api_kyes_test
 
 import (
 	"context"
