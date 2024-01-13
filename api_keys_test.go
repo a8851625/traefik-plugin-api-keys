@@ -1,4 +1,4 @@
-package plugindemo_test
+package apikey_test
 
 import (
 	"context"
@@ -37,7 +37,7 @@ func TestAPIKeyValidator(t *testing.T) {
     }{
         {"Ignore Path", "/ignore", "", http.StatusOK},
         {"Block Path", "/block1", "", http.StatusForbidden},
-        {"Valid API Key", "/normal", "valid-key", http.StatusOK},
+        {"Valid API Key", "/normal", "sk-valid-key-sample", http.StatusOK},
         {"Invalid API Key", "/normal", "invalid-key", http.StatusUnauthorized},
     }
 

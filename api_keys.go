@@ -1,12 +1,13 @@
 // Package plugindemo a demo plugin.
-package plugindemo
+package apikey
+
 import (
 	"context"
 	"fmt"
-	"net/http"
-	"strings"
 	"log"
+	"net/http"
 	"regexp"
+	"strings"
 )
 
 // APIKeyValidatorConfig struct for plugin configuration
@@ -97,7 +98,7 @@ func (a *APIKeyValidator) isPathMatched(path string, patterns []*regexp.Regexp) 
 func (a *APIKeyValidator) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	// Check if the path is in the ignore list
-	isIgnorePath = a.isPathMatched(req.URL.Path, a.ignorePathRegex)
+	isIgnorePath := a.isPathMatched(req.URL.Path, a.ignorePathRegex)
 
     // Check if the path is blocked
     if a.isPathMatched(req.URL.Path, a.blockPathRegex) {
