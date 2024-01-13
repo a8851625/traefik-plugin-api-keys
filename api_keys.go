@@ -96,9 +96,15 @@ func (a *APIKeyValidator) isPathMatched(path string, patterns []*regexp.Regexp) 
 
 // ServeHTTP implements the HTTP handler interface
 func (a *APIKeyValidator) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-
+	fmt.Println("APIKeyValidator ServeHTTP"+ req.URL.Path+ " "+ req.Method+" "+ req.Header.Get("X-API-Key"))
 	// Check if the path is in the ignore list
 	isIgnorePath := a.isPathMatched(req.URL.Path, a.ignorePathRegex)
+
+	if isIgnorePath {
+		// Proceed with the next handler
+		a.next.ServeHTTP(rw, req)
+		return
+	}
 
     // Check if the path is blocked
     if a.isPathMatched(req.URL.Path, a.blockPathRegex) {
@@ -110,17 +116,13 @@ func (a *APIKeyValidator) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	if apiKey == "" {
 		http.Error(rw, "API key is missing or not provided correctly", http.StatusUnauthorized)
+		fmt.Println("API key is missing or not provided correctly")
 		return
 	}
 
 	if !a.isValidAPIKey(apiKey) {
+		fmt.Println("Invalid API Key:" + apiKey)
 		http.Error(rw, "Invalid API Key", http.StatusUnauthorized)
-		return
-	}
-
-	if !isIgnorePath {
-		// Add the API key to the request header
-		http.Error(rw, "API key is missing or not provided correctly", http.StatusUnauthorized)
 		return
 	}
 

@@ -2,6 +2,7 @@ package traefik_plugin_api_keys_test
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -52,12 +53,14 @@ func TestAPIKeyValidator(t *testing.T) {
 
             // Set API key if provided
             if scenario.apiKey != "" {
+                fmt.Println("Test :" + scenario.description  +  "Setting API key:" + scenario.apiKey+ " path:" + scenario.path)
                 req.Header.Set(cfg.APIKeyHeader, scenario.apiKey)
             }
 
             handler.ServeHTTP(recorder, req)
 
             if recorder.Result().StatusCode != scenario.expectedStatus {
+                fmt.Println(recorder.Header())
                 t.Errorf("unexpected status for %s: got %v want %v",
                     scenario.description, recorder.Result().StatusCode, scenario.expectedStatus)
             }
