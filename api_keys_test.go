@@ -1,4 +1,4 @@
-package traefik_plugin_api_kyes_test
+package traefik_plugin_api_keys_test
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	apikeys "github.com/a8851625/traefik-plugin-api-kyes"
+	apikeys "github.com/a8851625/traefik-plugin-api-keys"
 )
 
 // TestAPIKeyValidator tests various scenarios for the APIKeyValidator plugin

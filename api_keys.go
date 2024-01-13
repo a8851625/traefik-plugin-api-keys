@@ -1,5 +1,5 @@
 // Package plugindemo a demo plugin.
-package traefik_plugin_api_kyes
+package traefik_plugin_api_keys
 
 import (
 	"context"
